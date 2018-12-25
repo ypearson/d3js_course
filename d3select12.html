@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title></title>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <style type="text/css">
+
+        div
+        {
+            height:25px;
+            margin:10px;
+            background:pink;
+            color:red;
+            text-align:center;
+            line-height:25px;
+        }
+    </style>
+</head>
+
+<body>
+</body>
+
+<script type="text/javascript">
+    var d = [20,40,60,80,100,120];
+
+    var bars = d3.select("body").selectAll("div").data(d);
+
+    bars.enter().append("div").text(d=>d).style("width",d=>d*10+"px");
+</script>
+
+</html>

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Class</title>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+</head>
+<body>
+
+    <input type="submit" name="name" value="clickme" onclick="randomAttr();">
+    <input type="submit" name="name" value="clickme" onclick="changeAttr();">
+    <input type="checkbox" name="cbname" value="checkbox">
+    <br>
+    <br>
+    <svg width="500" height="500" style="background: pink;">
+    <g transform="translate(0,0)">
+        <circle cx="50"  cy= "100" r="25"></circle>
+        <circle cx="150" cy= "100" r="25"></circle>
+        <circle cx="250" cy= "100" r="25"></circle>
+        <circle cx="350" cy= "100" r="25"></circle>
+    </g>
+    </svg>
+</body>
+
+<script type="text/javascript">
+
+
+function randomAttr() {
+    d3.selectAll("g>circle").attr('r', (d,i)=>{console.log(d,i); return 25+Math.random()*50;});
+    d3.select("input[type=checkbox]").property("checked", true);
+}
+
+function changeAttr() {
+    d3.selectAll("g > circle").attr("cy", (d,i)=>{console.log(d,i); return 100+i*100;});
+}
+
+
+
+</script>
+</html>

@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title></title>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <style type="text/css">
+        .someClass
+        {
+            background: deeppink;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+</body>
+
+<script type="text/javascript">
+
+    var array = [20,30,40,50,60,70];
+    d3.selectAll("body > p")
+    .data(array).text((d,i)=>array[i])
+    .style("font-size", (d,i)=>array[i]+"px")
+    .classed("someClass", (d,i)=> d>30);
+</script>
+
+</html>

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<style type="text/css">
+
+
+</style>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+
+</head>
+<body>
+
+    <input type="submit" name="click" onclick="clickThis();">
+    <br>
+    <br>
+    <svg width="600" height="600" id="one" >
+        <circle cx="50"  cy="50" r="40"></circle>
+        <circle cx="150" cy="50" r="40"></circle>
+        <circle cx="250" cy="50" r="40"></circle>
+        <circle cx="350" cy="50" r="40"></circle>
+    <g transform="translate(0,50)">
+        <rect x="20" y="200" width="60" height="40"></rect>
+        <rect x="20" y="300" width="60" height="40"></rect>
+        <rect x="20" y="400" width="60" height="40"></rect>
+        <rect x="20" y="500" width="60" height="40"></rect>
+    </g>
+    </svg>
+
+</body>
+<script type="text/javascript">
+
+
+    function clickThis() {
+        d3.selectAll('circle').style("fill", "blue").style("stroke", "red").style("stroke-width", (d,i)=> i*8*Math.random()+1)
+        d3.selectAll("rect").style("fill", "red").style("opacity", function() {
+            return Math.random();});
+    }
+
+</script>
+</html>

@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Class</title>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+</head>
+<body>
+
+    <input type="submit" name="name" value="clickme" onclick="clickme();">
+    <div id="someDiv">
+        <p>test1</p>
+        <span>test2</span>
+        <p>test3</p>
+    </div>
+    <br>
+</body>
+
+<script type="text/javascript">
+
+
+function clickme() {
+
+    d3.select("p").text("new contents");
+    d3.select("span").html("<b>new contents</b>");
+    d3.select("#someDiv").append("p").text("appended p").style("font-weight", "bold");
+    d3.select("#someDiv").insert("p","p:nth-child(3)").text("insert p").style("font-weight", "bold");
+
+}
+
+</script>
+</html>

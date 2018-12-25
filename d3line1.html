@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title></title>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <style type="text/css">
+    .line0
+    {
+      fill:none;
+      stroke:blue;
+      stroke-width:5;
+    }
+    .line1
+    {
+      fill:none;
+      stroke:red;
+      stroke-width:5;
+    }
+    .line2
+    {
+      fill:none;
+      stroke:green;
+      stroke-width:5;
+    }
+
+
+    </style>
+</head>
+
+<body>
+</body>
+
+<script type="text/javascript">
+
+  var margin = {top:50, bottom:50, left:50, right:50};
+  var width  = window.innerWidth  - margin.left - margin.right;
+  var height = window.innerHeight - margin.top  - margin.bottom;
+
+  var data1 = [ [10,10], [50,110], [70,60], [86,600], [100,410]]
+
+  var data = [
+    {line:[{x:100, y:10},{x:200, y:400},{x:300, y:10},{x:400, y:400},{x:500, y:10}]},
+    {line:[{x:100, y:20},{x:200, y:500},{x:300, y:20},{x:400, y:500},{x:500, y:20}]},
+    {line:[{x:100, y:30},{x:200, y:600},{x:300, y:30},{x:400, y:600},{x:500, y:30}]}]
+
+  var xScale = d3.scaleLinear()
+    .domain([0,500])
+    .rangeRound([0,width])
+
+  var yScale = d3.scaleLinear()
+    .domain([0,800])
+    .rangeRound([height,0])
+
+  var xAxis = d3.axisBottom(xScale)
+  var yAxis = d3.axisLeft(yScale)
+
+  var svg = d3.select("body")
+  .append("svg")
+  .attr("width", window.innerWidth)
+  .attr("height", window.innerHeight)
+  .style("background", "pink")
+  .append("g")
+  .attr("transform", "translate("+margin.left+","+margin.top+")");
+
+  var line1 = d3.line()
+  .x(d=>xScale(d[0]))
+  .y(d=>yScale(d[1]))
+  .curve(d3.curveMonotoneX);
+
+  svg.append("path")
+  .attr("d",line1(data1))
+  .style("fill", "none")
+  .style("stroke", "indigo")
+  .style("stroke-width", "5")
+
+  var line = d3.line()
+  .x(d=>xScale(d.x))
+  .y(d=>yScale(d.y))
+  .curve(d3.curveMonotoneX);
+
+  svg.selectAll(".line")
+  .data(data)
+  .enter()
+  .append("path")
+  .attr("class", (d,i)=>"line"+i)
+  .attr("d", (d,i)=>line(data[i].line))
+
+  svg.selectAll(".alldots")
+  .data(data)
+  .enter()
+  .each((d,i)=>{
+    svg.selectAll(".dots")
+    .data(d.line)
+    .enter()
+    .each((d,i)=>{
+      svg.append("circle")
+      .attr("cx",xScale(d.x))
+      .attr("cy",yScale(d.y))
+      .attr("r",5)
+      .style("fill", "red")
+      })
+  });
+
+  svg
+  .append("g")
+  .attr("transform", "translate(0,"+height+")")
+  .attr("class", "x axis")
+  .call(xAxis)
+
+  svg
+  .append("g")
+  .attr("class", "y axis")
+  .call(yAxis)
+
+</script>
+</html>

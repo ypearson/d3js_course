@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title></title>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <style type="text/css">
+    .bar {
+    fill: steelblue;
+    }
+
+    .bar:hover {
+    fill: orange;
+    }
+    </style>
+</head>
+
+<body>
+</body>
+
+<script type="text/javascript">
+
+  function formatDate(date) {
+      var monthNames = [
+        "Jan", "Feb", "Mar","Apr", "May", "Jun", "Jul",
+        "Aug", "Sept", "Oct","Nov", "Dec"];
+
+      var day = date.getDate();
+      var monthIndex = date.getMonth();
+      var year = date.getFullYear();
+
+      // return day + ' ' + monthNames[monthIndex] + ' ' + year;
+      return monthNames[monthIndex] + ' ' + year;
+    }
+
+    var margin = {top:75, bottom:75, left:75, right:75}
+    var width  = window.innerWidth  - margin.left - margin.right;
+    var height = window.innerHeight - margin.top  - margin.bottom;
+
+    var data = [
+    {year:"2018-01-02", cost:1411},
+    {year:"2018-02-02", cost:3411},
+    {year:"2018-03-02", cost:6311},
+    {year:"2018-04-02", cost:3451},
+    {year:"2018-05-02", cost:4351},
+    {year:"2018-06-02", cost:3423},
+    {year:"2018-07-02", cost:2141},
+    {year:"2018-08-02", cost:4561},
+    {year:"2018-09-02", cost:7411},
+    {year:"2018-10-02", cost:4353},
+    {year:"2018-11-02", cost:1346},
+    {year:"2018-12-02", cost:8411},
+    {year:"2019-01-02", cost:411}];
+
+    var xScale = d3.scaleBand()
+                .domain(data.map(d=>new Date(d.year)))
+                .rangeRound([0, width])
+                .padding(0.1);
+
+    var yScale = d3.scaleLinear()
+                  .domain([0,9000])
+                  .range([height,0]);
+
+    var svg = d3.select("body")
+    .append("svg")
+    .attr("width",window.innerWidth)
+    .attr("height", window.innerHeight)
+    .style("background","pink")
+    .append("g")
+    .attr("transform", "translate("+margin.left+","+margin.top+")");
+
+    svg.append("g")
+    .attr("transform", "translate(0,"+height+")")
+    .call(d3.axisBottom(xScale).tickFormat((d)=>formatDate(d)));
+
+    svg.selectAll(".bar")
+    .data(data)
+    .enter()
+    .append("rect")
+    .attr("class", "bar")
+    .attr("x", (d)=>xScale(new Date(d.year)))
+    .attr("y", (d)=>yScale(d.cost))
+    .attr("width", xScale.bandwidth())
+    .attr("height", (d)=>height - yScale(d.cost));
+
+    svg.append("g")
+    .call(d3.axisLeft(yScale))
+
+</script>
+</html>

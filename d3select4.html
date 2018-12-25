@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Class</title>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <style>
+
+    .circleClass
+    {
+        stroke: blue;
+        fill: red;
+        stroke-width:5;
+    }
+    .boxes
+    {
+        width: 100px;
+        height: 50px;
+        border: 3px solid blue;
+        margin: 10px;
+        background: red;
+    }
+    </style>
+</head>
+<body>
+    <input type="submit" name="nameBtn1" value="add class"    onclick="addClass();">    <br>
+    <input type="submit" name="nameBtn2" value="remove class" onclick="removeClass();"> <br>
+    <svg width="500" height="200">
+        <circle cx="50" cy="50" r="40"></circle>
+        <circle cx="140" cy="50" r="40"></circle>
+        <circle cx="230" cy="50" r="40"></circle>
+        <circle cx="320" cy="50" r="40"></circle>
+    </svg><br/><br/>
+
+    <div id="parent1">
+        <div>aaa</div>
+        <div></div>
+        <div></div>
+    </div>
+
+<script type="text/javascript">
+
+
+    function addClass() {
+        d3.selectAll("circle").classed("circleClass", true);
+        d3.selectAll("#parent1 > div").classed("boxes", true);
+    }
+    function removeClass() {
+        // d3.selectAll("circle").classed("circleClass", false);
+        d3.selectAll("circle").classed("circleClass",(d,i)=>i%2);
+        d3.selectAll("#parent1 > div").classed("boxes", false);
+    }
+
+
+</script>
+
+</body>
+</html>

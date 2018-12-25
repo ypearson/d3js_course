@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title></title>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <style type="text/css">
+
+    </style>
+</head>
+
+<body>
+</body>
+
+<script type="text/javascript">
+
+    var data = [3000,4100,2600,4300,100,3200];
+    var t = ['A','B','C','D','E','F'];
+
+    var pixel_height = 500;
+    var pixel_width  = 500;
+
+    var myScale = d3.scaleLinear();
+    myScale
+    .domain([d3.min(data,(d)=>d-100),
+             d3.max(data,(d)=>d+100)]) // range for data
+    .range([0,pixel_height]);          // pixel range for SVG
+
+    var colorScale = d3.scaleLinear();
+    colorScale
+    .domain([d3.min(data,(d)=>d),
+             d3.max(data,(d)=>d)]) // range for data
+    .range(["red","blue"]);          // pixel range for SVG
+
+    var svg = d3.select("body")
+        .append("svg")
+        .attr("width", pixel_width)
+        .attr("height",pixel_height)
+        .style("background", "pink");
+
+    var rects = svg.selectAll('rect').data(data);
+
+    rects
+    .enter()
+    .append("rect")
+    .attr("x",(d,i)=>22*i)
+    .attr("y",(d)=>pixel_height-myScale(d))
+    .attr("width",20)
+    .attr("height",(d)=>myScale(d))
+    .style("fill", (d)=>colorScale(d));
+
+    var texts = svg.selectAll("text").data(t);
+
+    texts
+    .enter()
+    .append("text")
+    .attr("x",(d,i)=>22*i)
+    .attr("y",(d,i)=>pixel_height-myScale(data[i]))
+    .text((d)=>d);
+
+</script>
+
+</html>

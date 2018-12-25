@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title></title>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <style type="text/css">
+        svg
+        {
+            background: gray;
+
+        }
+    </style>
+</head>
+<body>
+    <svg width="600" height="600">
+        <circle></circle>
+        <circle></circle>
+        <circle></circle>
+        <circle></circle>
+        <circle></circle>
+        <circle></circle>
+    </svg>
+</body>
+
+<script type="text/javascript">
+
+    var obj = [{radius:20, cx:50,  cy:50, color:"red"},
+               {radius:25, cx:150, cy:50, color:"deeppink"},
+               {radius:30, cx:250, cy:50, color:"blue"},
+               {radius:35, cx:350, cy:50, color:"indigo"},
+               {radius:40, cx:450, cy:50, color:"brown"},
+               {radius:4,  cx:550, cy:50, color:"green"}];
+
+    d3.selectAll("circle")
+    .data(obj)
+    .attr("r",(d,i)=>d.radius)
+    .attr("cx",(d,i)=>d.cx)
+    .attr("cy",(d,i)=>d.cy)
+    .attr("fill",(d,i)=>d.color);
+
+</script>
+
+</html>

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title></title>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <style type="text/css">
+        .someP
+        {
+            background: black;
+            color:white;
+            font-size:50px;
+            width:150px;
+            margin:0px;
+            padding:0px;
+        }
+    </style>
+</head>
+<body>
+
+    <div>
+    <p class="someP">x</p>
+    </div>
+</body>
+
+<script type="text/javascript">
+
+    var obj = ["data1","data2","data3","data4","data5"];
+
+    var update = d3.select("body").selectAll("div > p").data(obj).text((d)=>d);
+
+    update
+    .exit()
+    .remove();
+
+    update
+    .enter()
+    .append("p")
+    .merge(update)
+    .text((d)=>d)
+    .classed("someP",true);
+
+
+</script>
+
+</html>

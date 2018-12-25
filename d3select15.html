@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title></title>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <style type="text/css">
+
+    </style>
+</head>
+
+<body>
+</body>
+
+<script type="text/javascript">
+
+    var obj = [ {date:"2018-01-01", amount:600},
+                {date:"2018-02-01", amount:500},
+                {date:"2018-03-01", amount:400},
+                {date:"2018-04-01", amount:300},
+                {date:"2018-05-01", amount:400},
+                {date:"2018-06-01", amount:500},]
+
+    var pixel_width  = 500;
+    var pixel_height = 500;
+
+    var start_date = d3.min(obj, (d)=>new Date(d.date));
+    var end_date   = d3.max(obj, (d)=>new Date(d.date));
+
+    var xScale = d3.scaleTime()
+                 .domain([start_date, end_date])
+                 .range([0,pixel_width]);
+
+    var yScale = d3.scaleLinear()
+                .domain([0,d3.max(obj, (d)=>d.amount)])
+                .range([0,pixel_height]);
+
+    var svg = d3.select("body")
+                .append("svg")
+                .attr("width", pixel_width)
+                .attr("height",pixel_height)
+                .style("background","pink");
+
+    var rects = svg.selectAll("rect").data(obj);
+
+    rects
+    .enter()
+    .append("rect")
+    .attr("x", (d)=>xScale(new Date(d.date)))
+    .attr("y", (d)=>pixel_height - yScale(d.amount))
+    .attr("width", 20)
+    .attr("height", (d,i)=>yScale(d.amount))
+    .style("fill", "red");
+
+    var texts = svg.selectAll("text").data(obj);
+
+    texts
+    .enter()
+    .append("text")
+    .text((d)=>d.date)
+    .attr("x", (d)=>xScale(new Date(d.date)))
+    .attr("y", (d)=>pixel_height)
+    .style("fill", "black");
+
+</script>
+
+</html>

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Selection</title>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <style type="text/css">
+        line
+        {
+            stroke: deeppink;
+            stroke-width:5;
+        }
+    </style>
+</head>
+<body>
+    <svg width="400" height="400" id="one">
+        <circle cx="40" cy="50" r="40"></circle>
+        <circle cx="130" cy="50" r="40"></circle>
+        <circle cx="220" cy="50" r="40"></circle>
+        <circle cx="310" cy="50" r="40"></circle>
+        <line x1="0" y1="0" x2="400" y2="400" />
+    </svg><br /><br />
+    <svg width="400" height="400" id="two">
+        <circle cx="40" cy="50" r="40"></circle>
+        <circle cx="130" cy="50" r="40"></circle>
+        <circle cx="220" cy="50" r="40"></circle>
+        <circle cx="310" cy="50" r="40"></circle>
+    </svg>
+    <script>
+
+        d3.selectAll("#one > circle:nth-child(even), #two > circle:nth-child(even)").style("fill", "indigo")
+        d3.selectAll("#one > circle:nth-child(odd),  #two > circle:nth-child(odd)").style("fill", "red")
+
+    </script>
+</body>
+</html>

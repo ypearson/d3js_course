@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title></title>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+</head>
+<body>
+
+    <input type="submit" name="name" value="clickme" onclick="clickme();">
+    <br>
+</body>
+
+<script type="text/javascript">
+
+
+function clickme() {
+
+    var svg = d3.select("body").append("svg").attr("width", 400).attr("height",400).style("background", "pink");
+
+    svg.append('g').attr("transform", "translate(50,50)").append("rect").attr("width",50).attr("height",50).style("fill","red");
+
+}
+
+</script>
+</html>
